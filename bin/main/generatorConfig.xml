@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+       PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+       "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+    
+   <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat"><!--MyBatis3Simple 所生成的Mapper.xml 較簡潔  <=> MyBatis3 -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tw.com.yichih.utils.MyMapper"/>
+            <!--使用MyMapper的插件，讓生成出來SysUserMapper的interface去繼承我們所定義的MyMapper-->
+        </plugin>
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/yichih_db?useUnicode=true&amp;serverTimezone=GMT&amp;convertToNull&amp;autoReconnect=true"
+                        userId="root"
+                        password="rootadmin1214"    >
+        </jdbcConnection>
+
+        <!-- 对于生成的pojo所在包 -->
+        <javaModelGenerator targetPackage="tw.com.yichih.pojo" targetProject="src/main/java"/>
+
+		<!-- 对于生成的mapper所在目录 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+		<!-- 配置mapper对应的java映射 -->
+        <javaClientGenerator targetPackage="tw.com.yichih.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+
+		<table tableName="sys_user"></table>
+		 
+    </context>
+    
+</generatorConfiguration>
+
